@@ -1,9 +1,16 @@
 import React, {useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 
-const Budget = () => {
-    const { budget, setBudget } = useContext(AppContext);
 
+const Budget = (props) => {
+    const { budget ,dispatch } = useContext(AppContext);
+
+    const alterBudget = () => {
+        dispatch({
+            type: 'SET_BUDGET',
+            payload: props.budget,
+        });
+    }
 
     return (
         <div className='alert alert-secondary'>
@@ -14,7 +21,8 @@ const Budget = () => {
                         id ="budget"
                         value={budget}
                         style={{ marginLeft: '2rem' , size: 10}}
-                        onChange={e => setBudget(e.target.value)}>
+                        onChange={alterBudget}
+                        step="10">
                         </input>
             </span>
         </div>
